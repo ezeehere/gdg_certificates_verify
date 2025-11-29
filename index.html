@@ -21,7 +21,6 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            /* Softer, more elegant gradient */
             background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
             margin: 0;
             padding: 20px;
@@ -32,14 +31,13 @@
             color: var(--text-main);
         }
 
-        /* The Main Card - Cleaner Shadow, Less "Heavy" */
         .card {
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(20px);
             width: 100%;
-            max-width: 850px; /* Slightly tighter width */
+            max-width: 850px;
             border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05); /* Softer shadow */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
             overflow: hidden;
             border: 1px solid rgba(255,255,255,1);
             display: flex;
@@ -47,29 +45,27 @@
             transition: transform 0.3s ease;
         }
 
-        /* Header */
         .header {
             padding: 40px 0 20px 0;
             text-align: center;
         }
         
         .logo {
-            height: 45px; /* Smaller, cleaner logo size */
+            height: 45px;
             width: auto;
             transition: transform 0.3s ease;
         }
         .logo:hover { transform: scale(1.05); }
 
-        /* Content Grid */
         .content {
             display: grid;
             grid-template-columns: 1.4fr 1fr;
-            gap: 40px; /* Balanced spacing */
+            gap: 40px;
             padding: 0 50px 50px 50px;
             animation: fadeIn 0.8s ease-out;
         }
 
-        /* Certificate Preview - Sleeker Border */
+        /* Certificate Preview Container */
         .preview-wrapper { position: relative; }
 
         .preview-container {
@@ -77,10 +73,14 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid #eaeaea; /* Thin, elegant border */
+            border: 1px solid #eaeaea;
             background: #fff;
             aspect-ratio: 16/11;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            /* Flex center to hold the spinner in the middle */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .preview-container:hover {
@@ -88,21 +88,29 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        iframe { width: 100%; height: 100%; border: none; }
+        /* Image Styling */
+        #cert-img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            display: block;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 0.5s ease-in-out;
+            position: relative;
+            z-index: 2; /* Sits above spinner */
+        }
 
-        /* Details Section */
         .details {
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
-        /* The Badge - Smaller and Cleaner */
         .verified-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(52, 168, 83, 0.08); /* Very subtle background */
+            background: rgba(52, 168, 83, 0.08);
             color: var(--google-green);
             padding: 6px 12px;
             border-radius: 100px;
@@ -120,10 +128,9 @@
             100% { box-shadow: 0 0 0 0 rgba(52, 168, 83, 0); }
         }
 
-        /* Typography - The Main Fix: Not Big/Bold anymore */
         h1 {
-            font-size: 26px; /* Reduced from 42px */
-            font-weight: 600; /* Reduced from 800 */
+            font-size: 26px;
+            font-weight: 600;
             color: var(--text-main);
             margin: 0 0 8px 0;
             line-height: 1.3;
@@ -136,7 +143,6 @@
             font-weight: 400;
         }
 
-        /* Meta Data Box - cleaner look */
         .meta-data {
             background: #fcfcfc;
             padding: 20px;
@@ -155,18 +161,9 @@
         }
         .meta-row:last-child { border: none; padding: 0; margin: 0; }
         
-        .label { 
-            font-weight: 400; 
-            color: var(--text-sub);
-            font-size: 13px;
-        }
-        .value { 
-            font-weight: 500; 
-            color: var(--text-main); 
-            font-size: 14px;
-        }
+        .label { font-weight: 400; color: var(--text-sub); font-size: 13px; }
+        .value { font-weight: 500; color: var(--text-main); font-size: 14px; }
 
-        /* Buttons - Sleek & Minimal */
         .btn-group {
             display: flex;
             flex-direction: column;
@@ -177,11 +174,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px 16px; /* Slimmer padding */
-            border-radius: 8px; /* Less rounded corners */
+            padding: 10px 16px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 500;
-            font-size: 14px; /* Smaller font */
+            font-size: 14px;
             transition: all 0.2s ease;
             cursor: pointer;
             border: none;
@@ -216,7 +213,7 @@
         }
         .btn-download:hover { text-decoration: underline; transform: none; }
 
-        /* Loader - KEPT AMAZING */
+        /* Loader Styles */
         .loader-container {
             padding: 100px;
             text-align: center;
@@ -224,6 +221,7 @@
             flex-direction: column;
             align-items: center;
         }
+        
         .spinner {
             width: 50px;
             height: 50px;
@@ -233,13 +231,19 @@
             border-bottom: 4px solid var(--google-yellow);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+        }
+
+        /* Specific style for the spinner INSIDE the image box */
+        #img-spinner {
+            position: absolute;
+            z-index: 1; /* Behind the image */
+            width: 40px; /* Slightly smaller for the box */
+            height: 40px;
         }
         
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Error */
         .error-msg {
             color: var(--google-red);
             text-align: center;
@@ -250,7 +254,6 @@
 
         .hidden { display: none !important; }
 
-        /* Mobile */
         @media (max-width: 800px) {
             .content { grid-template-columns: 1fr; gap: 30px; padding: 30px; }
             h1 { font-size: 22px; }
@@ -274,7 +277,7 @@
 
         <div id="loader" class="loader-container">
             <div class="spinner"></div>
-            <p style="color: var(--text-sub); font-size: 15px; font-weight: 500;">Verifying Credential...</p>
+            <p style="color: var(--text-sub); font-size: 15px; font-weight: 500; margin-top: 20px;">Verifying Credential...</p>
         </div>
 
         <div id="error" class="error-msg hidden"></div>
@@ -283,7 +286,8 @@
             
             <div class="preview-wrapper">
                 <div class="preview-container">
-                    <img id="cert-img" src="" alt="Certificate Preview" style="width: 100%; height: 100%; object-fit: contain; display: block;">
+                    <div id="img-spinner" class="spinner"></div>
+                    <img id="cert-img" src="" alt="Certificate Preview">
                 </div>
             </div>
 
@@ -320,7 +324,7 @@
                     </a>
 
                     <a id="btn-profile" href="#" target="_blank" class="btn btn-google">
-                        <img src="google.svg" width="16" style="margin-right: 10px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="16" style="margin-right: 10px;">
                         Verify on Google
                     </a>
 
@@ -352,20 +356,33 @@
                 if (data.valid) {
                     document.getElementById('result').classList.remove('hidden');
                     
-                    // Fill Data
+                    // Fill Text Data
                     document.getElementById('name').innerText = data.name;
                     document.getElementById('cert-id').innerText = data.certId;
-                    // Convert the raw date to a readable format
+                    
+                    // Date Formatting
                     const dateObj = new Date(data.date);
                     const niceDate = dateObj.toLocaleDateString('en-US', { 
                         year: 'numeric', 
                         month: 'long', 
                         day: 'numeric' 
                     });
-
                     document.getElementById('date').innerText = niceDate;
+
+                    // --- IMAGE LOADER LOGIC ---
+                    const img = document.getElementById('cert-img');
+                    const imgSpinner = document.getElementById('img-spinner');
+
+                    // 1. Set Image Source
+                    img.src = `https://drive.google.com/thumbnail?id=${data.fileId}&sz=w1000`;
+                    
+                    // 2. When Image Loads, Hide Spinner & Fade In Image
+                    img.onload = function() {
+                        imgSpinner.style.display = 'none'; // Hide spinner
+                        img.style.opacity = '1';           // Fade in image
+                    };
+
                     // Set Links
-                    document.getElementById('cert-img').src = `https://drive.google.com/thumbnail?id=${data.fileId}&sz=w1000`;
                     document.getElementById('btn-profile').href = data.profileUrl || "#"; 
                     document.getElementById('btn-download').href = `https://drive.google.com/u/0/uc?id=${data.fileId}&export=download`;
 
