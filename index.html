@@ -283,7 +283,7 @@
             
             <div class="preview-wrapper">
                 <div class="preview-container">
-                    <iframe id="cert-frame" src=""></iframe>
+                    <img id="cert-img" src="" alt="Certificate Preview" style="width: 100%; height: 100%; object-fit: contain; display: block;">
                 </div>
             </div>
 
@@ -355,10 +355,17 @@
                     // Fill Data
                     document.getElementById('name').innerText = data.name;
                     document.getElementById('cert-id').innerText = data.certId;
-                    document.getElementById('date').innerText = data.date;
+                    // Convert the raw date to a readable format
+                    const dateObj = new Date(data.date);
+                    const niceDate = dateObj.toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    });
 
+                    document.getElementById('date').innerText = niceDate;
                     // Set Links
-                    document.getElementById('cert-frame').src = `https://drive.google.com/file/d/${data.fileId}/preview`;
+                    document.getElementById('cert-img').src = `https://drive.google.com/thumbnail?id=${data.fileId}&sz=w1000`;
                     document.getElementById('btn-profile').href = data.profileUrl || "#"; 
                     document.getElementById('btn-download').href = `https://drive.google.com/u/0/uc?id=${data.fileId}&export=download`;
 
