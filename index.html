@@ -6,7 +6,7 @@
     <title>Certificate Verification | GDG JIST</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -14,33 +14,43 @@
             --google-red: #EA4335;
             --google-yellow: #FBBC04;
             --google-green: #34A853;
-            --text-main: #202124;
+            --text-main: #1a1a1a;
             --text-sub: #5f6368;
-            --bg-color: #f0f4f8;
+            --bg-color: #f8f9fa;
+            --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            background-image: radial-gradient(#e1e5ea 1px, transparent 1px);
-            background-size: 30px 30px;
+            background: linear-gradient(-45deg, #e0eafe, #fbe0e0, #feefe0, #e0f6e4);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             margin: 0;
             padding: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* The Main Card */
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             width: 100%;
-            max-width: 900px;
-            border-radius: 24px;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            max-width: 950px;
+            border-radius: 32px;
+            box-shadow: var(--card-shadow);
             overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.8);
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
@@ -48,35 +58,51 @@
 
         /* Header with Logo */
         .header {
-            padding: 40px 0 20px 0;
+            padding: 50px 0 30px 0;
             text-align: center;
-            background: white;
+            background: transparent;
         }
         
         .logo {
-            height: 50px; /* Adjust size based on your image */
+            height: 60px; 
             width: auto;
             margin-bottom: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         /* Content Grid */
         .content {
             display: grid;
-            grid-template-columns: 1.4fr 1fr;
-            gap: 40px;
-            padding: 0 40px 40px 40px;
-            animation: fadeIn 0.6s ease-out;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 60px; /* Airy gap */
+            padding: 0 60px 60px 60px;
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         /* Left Side: The Certificate Preview */
+        .preview-wrapper {
+            position: relative;
+        }
+
         .preview-container {
             position: relative;
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 1px solid #eee;
-            background: #f8f9fa;
-            aspect-ratio: 16/11; /* Matches standard cert aspect ratio */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 4px solid white;
+            background: #fff;
+            aspect-ratio: 16/11;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .preview-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
         }
 
         iframe {
@@ -95,91 +121,126 @@
         .verified-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background-color: #e6f4ea;
+            gap: 10px;
+            background: white;
             color: var(--google-green);
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             width: fit-content;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(52, 168, 83, 0.15);
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(52, 168, 83, 0.15);
+            border: 1px solid rgba(52, 168, 83, 0.2);
+            animation: pulseBadge 3s infinite;
+        }
+
+        @keyframes pulseBadge {
+            0% { box-shadow: 0 0 0 0 rgba(52, 168, 83, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(52, 168, 83, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 168, 83, 0); }
         }
 
         h1 {
-            font-size: 32px;
+            font-size: 42px; /* Large and readable */
             color: var(--text-main);
-            margin: 0 0 10px 0;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
+            margin: 0 0 15px 0;
+            line-height: 1.1;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-sub);
+            margin-bottom: 35px;
+            font-weight: 500;
         }
 
         .meta-data {
-            color: var(--text-sub);
-            font-size: 15px;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 12px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid #eee;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
         .meta-row {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 8px;
-            margin-bottom: 8px;
+            align-items: center;
+            border-bottom: 1px dashed #e0e0e0;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
         }
         .meta-row:last-child {
             border: none;
             padding: 0;
             margin: 0;
         }
-        .label { font-weight: 500; }
-        .value { font-weight: 600; color: var(--text-main); }
+        
+        .label { 
+            font-weight: 500; 
+            color: var(--text-sub);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .value { 
+            font-weight: 700; 
+            color: var(--text-main); 
+            font-size: 16px;
+        }
 
         /* Buttons */
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
 
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 14px;
-            border-radius: 12px;
+            padding: 16px;
+            border-radius: 14px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 15px;
-            transition: all 0.2s ease;
+            font-size: 16px;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
             border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
         }
 
         .btn-linkedin {
-            background-color: #0a66c2;
+            background: linear-gradient(135deg, #0a66c2, #004182);
             color: white;
-            box-shadow: 0 4px 10px rgba(10, 102, 194, 0.3);
+            box-shadow: 0 4px 15px rgba(10, 102, 194, 0.3);
         }
-        .btn-linkedin:hover {
-            background-color: #004182;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(10, 102, 194, 0.4);
-        }
-
+        
         .btn-google {
             background-color: white;
             color: var(--text-main);
-            border: 1px solid #dadce0;
+            border: 2px solid #f1f3f4;
         }
         .btn-google:hover {
+            border-color: #dadce0;
             background-color: #f8f9fa;
-            border-color: var(--text-main);
         }
         
         .btn-download {
@@ -187,46 +248,67 @@
             color: var(--google-blue);
             font-weight: 600;
             margin-top: 5px;
+            padding: 10px;
         }
         .btn-download:hover {
-            text-decoration: underline;
+            background-color: rgba(66, 133, 244, 0.05);
+            transform: none;
+            box-shadow: none;
         }
 
         /* Loading Spinner */
         .loader-container {
-            padding: 100px;
+            padding: 120px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .spinner {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border: 5px solid #f3f3f3;
             border-top: 5px solid var(--google-blue);
+            border-right: 5px solid var(--google-green);
+            border-bottom: 5px solid var(--google-yellow);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 20px auto;
+            margin-bottom: 25px;
         }
+        
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Error State */
         .error-msg {
             color: var(--google-red);
             text-align: center;
-            padding: 50px;
-            font-weight: 500;
+            padding: 60px;
+            font-weight: 600;
+            font-size: 18px;
+            background: #fff5f5;
+            margin: 20px;
+            border-radius: 12px;
         }
 
         .hidden { display: none !important; }
 
         /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .content { grid-template-columns: 1fr; padding: 20px; }
+        @media (max-width: 900px) {
+            .content { grid-template-columns: 1fr; gap: 40px; padding: 40px; }
+            h1 { font-size: 32px; }
+            .preview-container { aspect-ratio: 16/10; }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 15px; align-items: flex-start; }
+            .card { border-radius: 24px; min-height: auto; }
+            .header { padding: 30px 0 20px 0; }
+            .content { padding: 30px 25px; }
+            h1 { font-size: 28px; }
+            .meta-row { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .value { font-size: 15px; }
             .preview-container { aspect-ratio: 4/3; }
-            h1 { font-size: 24px; }
-            .card { border-radius: 0; min-height: 100vh; box-shadow: none; }
-            body { padding: 0; align-items: flex-start; }
-            .meta-data { font-size: 14px; }
         }
     </style>
 </head>
@@ -239,24 +321,29 @@
 
         <div id="loader" class="loader-container">
             <div class="spinner"></div>
-            <p style="color: #5f6368; font-weight: 500;">Verifying Credential...</p>
+            <p style="color: var(--text-sub); font-weight: 600; font-size: 18px;">Verifying Credential...</p>
         </div>
 
         <div id="error" class="error-msg hidden"></div>
 
         <div id="result" class="content hidden">
             
-            <div class="preview-container">
-                <iframe id="cert-frame" src=""></iframe>
+            <div class="preview-wrapper">
+                <div class="preview-container">
+                    <iframe id="cert-frame" src=""></iframe>
+                </div>
             </div>
 
             <div class="details">
-                <div class="verified-badge">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                    Officially Verified
-                </div>
+                <div>
+                    <div class="verified-badge">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 2px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        Officially Verified
+                    </div>
 
-                <h1 id="name">Student Name</h1>
+                    <h1 id="name">Student Name</h1>
+                    <div class="subtitle">has successfully completed the requirements for</div>
+                </div>
                 
                 <div class="meta-data">
                     <div class="meta-row">
@@ -275,16 +362,17 @@
 
                 <div class="btn-group">
                     <a id="btn-linkedin" href="#" target="_blank" class="btn btn-linkedin">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 10px;"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         Add to LinkedIn Profile
                     </a>
 
                     <a id="btn-profile" href="#" target="_blank" class="btn btn-google">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20" style="margin-right: 10px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="20" style="margin-right: 12px;">
                         Verify Badges on Google
                     </a>
 
                     <a id="btn-download" href="#" class="btn btn-download">
-                        Download PDF
+                        Download PDF Copy
                     </a>
                 </div>
             </div>
@@ -349,4 +437,3 @@
 
 </body>
 </html>
-
