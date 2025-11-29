@@ -6,7 +6,7 @@
     <title>Certificate Verification | GDG JIST</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -14,18 +14,15 @@
             --google-red: #EA4335;
             --google-yellow: #FBBC04;
             --google-green: #34A853;
-            --text-main: #1a1a1a;
+            --text-main: #202124;
             --text-sub: #5f6368;
             --bg-color: #f8f9fa;
-            --card-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            --hover-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(-45deg, #e0eafe, #fbe0e0, #feefe0, #e0f6e4);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            /* Softer, more elegant gradient */
+            background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -35,279 +32,235 @@
             color: var(--text-main);
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* The Main Card */
+        /* The Main Card - Cleaner Shadow, Less "Heavy" */
         .card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(20px);
             width: 100%;
-            max-width: 950px;
-            border-radius: 32px;
-            box-shadow: var(--card-shadow);
+            max-width: 850px; /* Slightly tighter width */
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05); /* Softer shadow */
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.8);
+            border: 1px solid rgba(255,255,255,1);
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
         }
 
-        /* Header with Logo */
+        /* Header */
         .header {
-            padding: 50px 0 30px 0;
+            padding: 40px 0 20px 0;
             text-align: center;
-            background: transparent;
         }
         
         .logo {
-            height: 60px; 
+            height: 45px; /* Smaller, cleaner logo size */
             width: auto;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: transform 0.3s ease;
         }
-        
-        .logo:hover {
-            transform: scale(1.05);
-        }
+        .logo:hover { transform: scale(1.05); }
 
         /* Content Grid */
         .content {
             display: grid;
-            grid-template-columns: 1.3fr 1fr;
-            gap: 60px; /* Airy gap */
-            padding: 0 60px 60px 60px;
-            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px; /* Balanced spacing */
+            padding: 0 50px 50px 50px;
+            animation: fadeIn 0.8s ease-out;
         }
 
-        /* Left Side: The Certificate Preview */
-        .preview-wrapper {
-            position: relative;
-        }
+        /* Certificate Preview - Sleeker Border */
+        .preview-wrapper { position: relative; }
 
         .preview-container {
             position: relative;
-            border-radius: 20px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 4px solid white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid #eaeaea; /* Thin, elegant border */
             background: #fff;
             aspect-ratio: 16/11;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .preview-container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        iframe { width: 100%; height: 100%; border: none; }
 
-        /* Right Side: Details */
+        /* Details Section */
         .details {
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
 
+        /* The Badge - Smaller and Cleaner */
         .verified-badge {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            background: white;
+            gap: 6px;
+            background: rgba(52, 168, 83, 0.08); /* Very subtle background */
             color: var(--google-green);
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 100px;
+            font-weight: 500;
+            font-size: 13px;
             width: fit-content;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(52, 168, 83, 0.15);
+            margin-bottom: 15px;
             border: 1px solid rgba(52, 168, 83, 0.2);
             animation: pulseBadge 3s infinite;
         }
 
         @keyframes pulseBadge {
-            0% { box-shadow: 0 0 0 0 rgba(52, 168, 83, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(52, 168, 83, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(52, 168, 83, 0.2); }
+            70% { box-shadow: 0 0 0 6px rgba(52, 168, 83, 0); }
             100% { box-shadow: 0 0 0 0 rgba(52, 168, 83, 0); }
         }
 
+        /* Typography - The Main Fix: Not Big/Bold anymore */
         h1 {
-            font-size: 42px; /* Large and readable */
+            font-size: 26px; /* Reduced from 42px */
+            font-weight: 600; /* Reduced from 800 */
             color: var(--text-main);
-            margin: 0 0 15px 0;
-            line-height: 1.1;
-            font-weight: 800;
-            letter-spacing: -1px;
+            margin: 0 0 8px 0;
+            line-height: 1.3;
         }
 
         .subtitle {
-            font-size: 18px;
+            font-size: 15px;
             color: var(--text-sub);
-            margin-bottom: 35px;
-            font-weight: 500;
+            margin-bottom: 25px;
+            font-weight: 400;
         }
 
+        /* Meta Data Box - cleaner look */
         .meta-data {
-            background: #fff;
-            padding: 25px;
-            border-radius: 16px;
-            border: 1px solid #eee;
-            margin-bottom: 35px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            background: #fcfcfc;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 25px;
         }
 
         .meta-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px dashed #e0e0e0;
-            padding-bottom: 12px;
-            margin-bottom: 12px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
         }
-        .meta-row:last-child {
-            border: none;
-            padding: 0;
-            margin: 0;
-        }
+        .meta-row:last-child { border: none; padding: 0; margin: 0; }
         
         .label { 
-            font-weight: 500; 
+            font-weight: 400; 
             color: var(--text-sub);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 13px;
         }
         .value { 
-            font-weight: 700; 
+            font-weight: 500; 
             color: var(--text-main); 
-            font-size: 16px;
+            font-size: 14px;
         }
 
-        /* Buttons */
+        /* Buttons - Sleek & Minimal */
         .btn-group {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
         }
 
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
-            border-radius: 14px;
+            padding: 10px 16px; /* Slimmer padding */
+            border-radius: 8px; /* Less rounded corners */
             text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            font-weight: 500;
+            font-size: 14px; /* Smaller font */
+            transition: all 0.2s ease;
             cursor: pointer;
             border: none;
-            position: relative;
-            overflow: hidden;
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--hover-shadow);
-        }
-
-        .btn:active {
-            transform: translateY(-1px);
-        }
+        .btn:hover { transform: translateY(-2px); }
 
         .btn-linkedin {
-            background: linear-gradient(135deg, #0a66c2, #004182);
+            background-color: #0a66c2;
             color: white;
-            box-shadow: 0 4px 15px rgba(10, 102, 194, 0.3);
+            box-shadow: 0 2px 5px rgba(10, 102, 194, 0.2);
         }
+        .btn-linkedin:hover { box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3); }
         
         .btn-google {
             background-color: white;
             color: var(--text-main);
-            border: 2px solid #f1f3f4;
+            border: 1px solid #dadce0;
         }
         .btn-google:hover {
-            border-color: #dadce0;
-            background-color: #f8f9fa;
+            border-color: var(--text-main);
+            background-color: #fff;
         }
         
         .btn-download {
             background-color: transparent;
             color: var(--google-blue);
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 13px;
             margin-top: 5px;
-            padding: 10px;
+            padding: 8px;
         }
-        .btn-download:hover {
-            background-color: rgba(66, 133, 244, 0.05);
-            transform: none;
-            box-shadow: none;
-        }
+        .btn-download:hover { text-decoration: underline; transform: none; }
 
-        /* Loading Spinner */
+        /* Loader - KEPT AMAZING */
         .loader-container {
-            padding: 120px;
+            padding: 100px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         .spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid var(--google-blue);
-            border-right: 5px solid var(--google-green);
-            border-bottom: 5px solid var(--google-yellow);
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--google-blue);
+            border-right: 4px solid var(--google-green);
+            border-bottom: 4px solid var(--google-yellow);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Error State */
+        /* Error */
         .error-msg {
             color: var(--google-red);
             text-align: center;
-            padding: 60px;
-            font-weight: 600;
-            font-size: 18px;
-            background: #fff5f5;
-            margin: 20px;
-            border-radius: 12px;
+            padding: 40px;
+            font-weight: 500;
+            font-size: 15px;
         }
 
         .hidden { display: none !important; }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 900px) {
-            .content { grid-template-columns: 1fr; gap: 40px; padding: 40px; }
-            h1 { font-size: 32px; }
+        /* Mobile */
+        @media (max-width: 800px) {
+            .content { grid-template-columns: 1fr; gap: 30px; padding: 30px; }
+            h1 { font-size: 22px; }
             .preview-container { aspect-ratio: 16/10; }
         }
 
         @media (max-width: 600px) {
-            body { padding: 15px; align-items: flex-start; }
-            .card { border-radius: 24px; min-height: auto; }
-            .header { padding: 30px 0 20px 0; }
-            .content { padding: 30px 25px; }
-            h1 { font-size: 28px; }
-            .meta-row { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .value { font-size: 15px; }
+            body { padding: 10px; }
+            .card { border-radius: 16px; }
+            .content { padding: 25px 20px; }
             .preview-container { aspect-ratio: 4/3; }
         }
     </style>
@@ -321,7 +274,7 @@
 
         <div id="loader" class="loader-container">
             <div class="spinner"></div>
-            <p style="color: var(--text-sub); font-weight: 600; font-size: 18px;">Verifying Credential...</p>
+            <p style="color: var(--text-sub); font-size: 15px; font-weight: 500;">Verifying Credential...</p>
         </div>
 
         <div id="error" class="error-msg hidden"></div>
@@ -337,7 +290,7 @@
             <div class="details">
                 <div>
                     <div class="verified-badge">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 2px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 2px;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                         Officially Verified
                     </div>
 
@@ -362,13 +315,13 @@
 
                 <div class="btn-group">
                     <a id="btn-linkedin" href="#" target="_blank" class="btn btn-linkedin">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 10px;"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        Add to LinkedIn Profile
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        Add to LinkedIn
                     </a>
 
                     <a id="btn-profile" href="#" target="_blank" class="btn btn-google">
-                        <img src="google.svg" width="20" style="margin-right: 12px;">
-                        Verify Badges on Google Cloud
+                        <img src="google.svg" width="16" style="margin-right: 10px;">
+                        Verify on Google
                     </a>
 
                     <a id="btn-download" href="#" class="btn btn-download">
@@ -437,4 +390,3 @@
 
 </body>
 </html>
-
