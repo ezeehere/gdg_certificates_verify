@@ -25,7 +25,7 @@
             margin: 0;
             padding: 20px;
             display: flex;
-            flex-direction: column; /* Changed to column to stack card and footer */
+            flex-direction: column; 
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -44,7 +44,7 @@
             display: flex;
             flex-direction: column;
             transition: transform 0.3s ease;
-            margin-bottom: 20px; /* Space for footer */
+            margin-bottom: 20px;
         }
 
         .header {
@@ -56,8 +56,12 @@
             height: 45px;
             width: auto;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
-        .logo:hover { transform: scale(1.05); }
+        .logo:hover { 
+            transform: scale(1.05); 
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
 
         .content {
             display: grid;
@@ -214,7 +218,17 @@
         }
         .btn-download:hover { text-decoration: underline; transform: none; }
 
-        /* Footer Credits */
+        /* NEW STYLE FOR THE NOTE */
+        .note-text {
+            font-size: 11px;
+            color: #757575;
+            margin-top: -2px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            padding: 0 5px;
+            font-style: italic;
+        }
+
         .footer-credits {
             font-size: 12px;
             color: #9aa0a6;
@@ -331,10 +345,14 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                         Add to LinkedIn
                     </a>
+                    
+                    <div class="note-text">
+                        Note: LinkedIn does not allow automatic PDF uploads. If you want the file visible directly on your profile, please click 'Download PDF' and upload it manually to the Media section of your certification.
+                    </div>
 
                     <a id="btn-profile" href="#" target="_blank" class="btn btn-google">
-                        <img src="google.svg" width="16" style="margin-right: 10px;">
-                        Verify on Google Cloud
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="16" style="margin-right: 10px;">
+                        Verify on Google
                     </a>
 
                     <a id="btn-download" href="#" class="btn btn-download">
