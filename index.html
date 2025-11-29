@@ -437,13 +437,23 @@
                     document.getElementById('btn-download').href = `https://drive.google.com/u/0/uc?id=${data.fileId}&export=download`;
 
                     // LinkedIn Integration
-                    const orgName = "Google Developer Group JIST";
+                    // LinkedIn Integration
+                    // We use Organization ID 1441 (Google) to ensure the official Logo appears.
+                    // Google for Developers is a Showcase page of Google.
+                    const orgId = 1441; 
                     const title = "Google Cloud Study Jam Completion";
+                    
+                    // Parse the date from your data to get the correct Month/Year automatically
+                    const certDate = new Date(data.date);
+                    const issueYear = certDate.getFullYear();
+                    const issueMonth = certDate.getMonth() + 1; // JS months are 0-11, LinkedIn needs 1-12
+
                     const verifyUrl = encodeURIComponent(window.location.href); 
-                    const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(title)}&organizationName=${encodeURIComponent(orgName)}&issueYear=2025&issueMonth=10&certId=${data.certId}&certUrl=${verifyUrl}`;
+                    
+                    // Note: We use 'organizationId' instead of 'organizationName' for the official link
+                    const linkedinUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(title)}&organizationId=${orgId}&issueYear=${issueYear}&issueMonth=${issueMonth}&certId=${data.certId}&certUrl=${verifyUrl}`;
                     
                     document.getElementById('btn-linkedin').href = linkedinUrl;
-
                 } else {
                     showError("Invalid Certificate ID. Please check the link.");
                 }
@@ -464,3 +474,4 @@
 
 </body>
 </html>
+
